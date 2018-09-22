@@ -1,0 +1,5 @@
+## APP INSTANCE ##
+app.instance.hostname: localhost:7000
+
+user.name.first: firstname_local
+user.name.last: lastname_local
