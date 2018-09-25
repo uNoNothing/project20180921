@@ -1,16 +1,14 @@
 package com.unonothing.usermgmt.model;
 
-import com.unonothing.common.enums.PhoneTypeConverter;
-import com.unonothing.usermgmt.model.PersonalInfo;
+import com.unonothing.usermgmt.enums.converter.PhoneTypeConverter;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,6 +19,7 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 public class PhoneInfo extends PersonalInfo {
 
     @Column(name = "phone")
@@ -33,8 +32,8 @@ public class PhoneInfo extends PersonalInfo {
     @ManyToOne
     @JoinColumn(
             name = "user_id",
-            foreignKey = @ForeignKey(name = "fk_phoneInfo_user"),
+            foreignKey = @ForeignKey(name = "FK_phoneInfo_userInfo"),
             nullable = false
     )
-    private User user;
+    private UserInfo userInfo;
 }

@@ -3,6 +3,7 @@ package com.unonothing.usermgmt.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +17,7 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 public class NameInfo extends PersonalInfo {
 
     private String title;
@@ -33,8 +35,8 @@ public class NameInfo extends PersonalInfo {
     @ManyToOne
     @JoinColumn(
             name = "user_id",
-            foreignKey = @ForeignKey(name = "fk_nameInfo_user"),
+            foreignKey = @ForeignKey(name = "FK_nameInfo_userInfo"),
             nullable = false
     )
-    private User user;
+    private UserInfo userInfo;
 }

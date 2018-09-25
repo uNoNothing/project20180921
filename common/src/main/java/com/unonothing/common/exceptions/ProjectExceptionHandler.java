@@ -1,6 +1,6 @@
 package com.unonothing.common.exceptions;
 
-import com.unonothing.common.dto.BaseDTO;
+import com.unonothing.common.dto.BaseEntityDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ public class ProjectExceptionHandler extends ResponseEntityExceptionHandler {
 
     // catch exceptions raised in project
     @ExceptionHandler(ProjectException.class)
-    public ResponseEntity<BaseDTO> handleProjectException(ProjectException ex){
+    public ResponseEntity<BaseEntityDTO> handleProjectException(ProjectException ex){
 
         log.error("Exception caught at handleProjectException. ex: ", ex);
         return handler(ex, ex.getHttpStatus());
@@ -25,7 +25,7 @@ public class ProjectExceptionHandler extends ResponseEntityExceptionHandler {
 
     // catch null pointer exception
     @ExceptionHandler(NullPointerException.class)
-    public ResponseEntity<BaseDTO> handleNullPointerException(NullPointerException ex){
+    public ResponseEntity<BaseEntityDTO> handleNullPointerException(NullPointerException ex){
 
         log.error("Exception caught at handleNullPointerException. ex: ", ex);
         return handler(ex, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -33,24 +33,24 @@ public class ProjectExceptionHandler extends ResponseEntityExceptionHandler {
 
     // catch all other exception
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<BaseDTO> handleException(Exception ex){
+    public ResponseEntity<BaseEntityDTO> handleException(Exception ex){
 
         log.error("Exception caught at handleException. ex: ", ex);
         return handler(ex, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    private ResponseEntity<BaseDTO> handler(Exception ex, HttpStatus httpStatus) {
+    private ResponseEntity<BaseEntityDTO> handler(Exception ex, HttpStatus httpStatus) {
         return new ResponseEntity<>(createBaseDTO(ex), httpStatus);
     }
 
-    private BaseDTO createBaseDTO(Exception ex){
+    private BaseEntityDTO createBaseDTO(Exception ex){
         log.error(ex.getMessage());
 
-        BaseDTO baseDTO = new BaseDTO();
-        baseDTO.setError(true);
-        baseDTO.setMessage(ex.getMessage());
+        BaseEntityDTO baseEntityDTO = new BaseEntityDTO();
+        baseEntityDTO.setError(true);
+        baseEntityDTO.setMessage(ex.getMessage());
 
-        return baseDTO;
+        return baseEntityDTO;
     }
 
 

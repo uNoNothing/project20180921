@@ -1,5 +1,6 @@
-package com.unonothing.common.enums;
+package com.unonothing.usermgmt.enums.converter;
 
+import com.unonothing.usermgmt.enums.PhoneType;
 import com.unonothing.common.exceptions.ExceptionFactory;
 import com.unonothing.common.exceptions.ExceptionType;
 
@@ -22,6 +23,6 @@ public class PhoneTypeConverter implements AttributeConverter<PhoneType, String>
             }
         }
 
-        throw ExceptionFactory.create(ExceptionType.ENUM_ERROR, "PhoneType enum");
+        throw ExceptionFactory.create(ExceptionType.ENUM_ERROR, "phone type");
     }
 }

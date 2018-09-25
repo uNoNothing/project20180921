@@ -1,5 +1,6 @@
-package com.unonothing.common.enums;
+package com.unonothing.usermgmt.enums.converter;
 
+import com.unonothing.usermgmt.enums.EmailType;
 import com.unonothing.common.exceptions.ExceptionFactory;
 import com.unonothing.common.exceptions.ExceptionType;
 
@@ -23,6 +24,6 @@ public class EmailTypeConverter implements AttributeConverter<EmailType, String>
             }
         }
 
-        throw ExceptionFactory.create(ExceptionType.ENUM_ERROR, "EmailType enum");
+        throw ExceptionFactory.create(ExceptionType.ENUM_ERROR, "email type");
     }
 }

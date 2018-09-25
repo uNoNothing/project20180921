@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.Basic;
@@ -18,10 +19,11 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 @EqualsAndHashCode(doNotUseGetters = true, onlyExplicitlyIncluded = true)
 @MappedSuperclass
 @Where(clause = "deleted = false")
-public abstract class BaseEntity implements Serializable {
+public class BaseEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,4 +38,7 @@ public abstract class BaseEntity implements Serializable {
     @Column(name = "uuid", nullable = false)
     private String uuid = Uuid.generate();
 
+    public BaseEntity(Boolean deleted) {
+        this.deleted = deleted;
+    }
 }
