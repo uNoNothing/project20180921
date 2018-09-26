@@ -2,6 +2,8 @@ package com.unonothing.common.swagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
@@ -13,12 +15,16 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
 
+
     public static final Contact DEFAULT_CONTACT = new Contact(
-            "uNoNother", "github.com:uNoNothing", "uNoNothing@users.noreply.github.com");
+            "uNoNothing",
+            "https://github.com/uNoNothing",
+            "uNoNothing@users.noreply.github.com");
 
     public static final ApiInfo DEFAULT_API_INFO = new ApiInfo(
             "project20180921",
@@ -28,7 +34,7 @@ public class SwaggerConfig {
             DEFAULT_CONTACT,
             "MIT License",
             "https://github.com/uNoNothing/project20180921/blob/master/LICENSE",
-            Collections.emptyList()
+            Collections.EMPTY_LIST
     );
 
     private static final Set<String> DEFAULT_PRODUCES_AND_CONSUMES =
@@ -39,6 +45,10 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(DEFAULT_API_INFO)
                 .produces(DEFAULT_PRODUCES_AND_CONSUMES)
-                .consumes(DEFAULT_PRODUCES_AND_CONSUMES);
+                .consumes(DEFAULT_PRODUCES_AND_CONSUMES)
+                .select()
+                .apis(RequestHandlerSelectors.any())
+                .paths(PathSelectors.any())
+                .build();
     }
 }

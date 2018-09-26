@@ -28,12 +28,11 @@ public class UserInfoController {
     public void create(@Valid UserInfoDTO userInfoDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             FieldError fieldError = bindingResult.getFieldErrors().get(0);
-            throw ExceptionFactory.create(ExceptionType.INPUT_VALIDATION_FAIL,
+            throw ExceptionFactory.create(ExceptionType.BAD_REQUEST,
                     fieldError.getField(), fieldError.getRejectedValue(),
                     fieldError.getDefaultMessage()
             );
         }
-        userInfoDTO.setCreatedBy("creator");
         userInfoService.create(userInfoDTO);
     }
 

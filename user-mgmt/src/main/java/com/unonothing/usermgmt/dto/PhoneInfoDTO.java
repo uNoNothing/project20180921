@@ -1,6 +1,6 @@
 package com.unonothing.usermgmt.dto;
 
-import com.unonothing.usermgmt.enums.validator.ValidPhoneType;
+import com.unonothing.usermgmt.annotation.ValidPhoneType;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -20,12 +20,13 @@ public class PhoneInfoDTO extends PersonalInfoDTO {
 
     @ApiModelProperty(notes = "phone should have at least 3 characters")
     @NotEmpty
-    @Size(min = 3, message = "phone should have at least 3 characters")
+    @Size(min = 3, max = 255, message = "phone should have at least 3 characters")
     private String phone;
 
     @ApiModelProperty(notes = "address type: mobile, home, work, home fax, work or other")
     @NotEmpty
     @ValidPhoneType
+    @Size(min = 2, max = 255)
     private String type;
 
     @ApiModelProperty(notes = "userId")

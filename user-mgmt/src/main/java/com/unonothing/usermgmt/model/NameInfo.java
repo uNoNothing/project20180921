@@ -11,6 +11,7 @@ import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "name_info")
@@ -20,15 +21,19 @@ import javax.persistence.Table;
 @ToString
 public class NameInfo extends PersonalInfo {
 
+    @Size(max = 255)
     private String title;
 
     @Column(name = "first_name", nullable = false)
+    @Size(min = 2, max = 255)
     private String firstName;
 
-    @Column(name = "middle_name", length = 1000)
+    @Column(name = "middle_name")
+    @Size(min = 2, max = 255)
     private String middleName;
 
     @Column(name = "last_name", nullable = false)
+    @Size(min = 2, max = 255)
     private String lastName;
 
 

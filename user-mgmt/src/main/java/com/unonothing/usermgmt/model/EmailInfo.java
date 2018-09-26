@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "email_info")
@@ -25,6 +26,7 @@ public class EmailInfo extends PersonalInfo {
 
     @Column(name = "email", nullable = false)
     @Email
+    @Size(min = 2, max = 255)
     private String email;
 
     @Convert(converter = EmailTypeConverter.class)

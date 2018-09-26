@@ -20,12 +20,12 @@ public class PersonalInfo extends BaseEntityAudit {
     @Column(name = "preferred", nullable = false)
     private Boolean preferred = false;
 
-    public PersonalInfo(BaseEntityAudit baseEntityAudit){
+    public PersonalInfo(BaseEntityAudit baseEntityAudit) {
         super(new BaseEntity(baseEntityAudit.getDeleted()),
-                baseEntityAudit.getCreatedBy(), baseEntityAudit.getUpdatedBy());
+                baseEntityAudit.getCurrentUser());
     }
 
-    public PersonalInfo(BaseEntityAudit baseEntityAudit, Boolean preferred){
+    public PersonalInfo(BaseEntityAudit baseEntityAudit, Boolean preferred) {
         this(baseEntityAudit);
         this.preferred = preferred;
     }

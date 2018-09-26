@@ -35,14 +35,14 @@ public class UserInfoMarshaller {
         return userInfoDTO;
     }
 
-    public static UserInfo unmarshall(UserInfoDTO userInfoDTO) {
+    public static UserInfo unmarshall(UserInfoDTO userInfoDTO, String currentUser) {
 
-        BaseEntityAudit baseEntityAudit = BaseEntityAuditMarshaller.unmarshall(userInfoDTO);
+        BaseEntityAudit baseEntityAudit = BaseEntityAuditMarshaller.unmarshall(userInfoDTO, currentUser);
 
         UserInfo userInfo = new UserInfo(baseEntityAudit, userInfoDTO.getUserName());
 
         if (!CollectionUtils.isEmpty(userInfoDTO.getAddressList())) {
-            userInfo.setAddressInfoList(AddressInfoMarshaller.unmarshall(userInfoDTO.getAddressList(), userInfo));
+            userInfo.setAddressInfoList(AddressInfoMarshaller.unmarshall(userInfoDTO.getAddressList(), userInfo, currentUser));
         }
 
         return userInfo;

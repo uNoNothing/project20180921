@@ -23,6 +23,6 @@ public enum EmailType {
                 return emailType;
             }
         }
-        throw ExceptionFactory.create(ExceptionType.ENUM_ERROR, "email type");
+        throw ExceptionFactory.create(ExceptionType.BAD_REQUEST, "Email type", type);
     }
 }

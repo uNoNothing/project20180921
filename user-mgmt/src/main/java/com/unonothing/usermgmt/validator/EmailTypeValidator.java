@@ -1,8 +1,7 @@
-package com.unonothing.usermgmt.enums.validator;
+package com.unonothing.usermgmt.validator;
 
+import com.unonothing.usermgmt.annotation.ValidEmailType;
 import com.unonothing.usermgmt.enums.converter.EmailTypeConverter;
-import com.unonothing.common.exceptions.ExceptionFactory;
-import com.unonothing.common.exceptions.ExceptionType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
@@ -22,6 +21,6 @@ public class EmailTypeValidator implements ConstraintValidator<ValidEmailType, S
                 return true;
             }
         }
-        throw ExceptionFactory.create(ExceptionType.ENUM_ERROR, "email type");
+        return false;
     }
 }

@@ -1,6 +1,6 @@
 package com.unonothing.usermgmt.dto;
 
-import com.unonothing.usermgmt.enums.validator.ValidEmailType;
+import com.unonothing.usermgmt.annotation.ValidEmailType;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -10,6 +10,7 @@ import lombok.ToString;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Getter
 @Setter
@@ -21,11 +22,13 @@ public class EmailInfoDTO extends PersonalInfoDTO {
     @ApiModelProperty(notes = "valid email address")
     @NotEmpty
     @Email
+    @Size(min = 2, max = 255)
     private String email;
 
     @ApiModelProperty(notes = "email type: personal, work or other")
     @NotEmpty
     @ValidEmailType
+    @Size(min = 2, max = 255)
     private String type;
 
     @ApiModelProperty(notes = "userId")

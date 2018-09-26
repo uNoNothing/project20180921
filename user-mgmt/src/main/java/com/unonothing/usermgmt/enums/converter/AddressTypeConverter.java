@@ -24,6 +24,6 @@ public class AddressTypeConverter implements AttributeConverter<AddressType, Str
                 return addressType;
             }
         }
-        throw ExceptionFactory.create(ExceptionType.ENUM_ERROR, "address type");
+        throw ExceptionFactory.create(ExceptionType.BAD_REQUEST, "Address type", type);
     }
 }

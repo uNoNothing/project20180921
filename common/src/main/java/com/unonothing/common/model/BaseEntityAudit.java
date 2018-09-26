@@ -1,5 +1,7 @@
 package com.unonothing.common.model;
 
+import com.unonothing.common.exceptions.ExceptionFactory;
+import com.unonothing.common.exceptions.ExceptionType;
 import com.unonothing.common.utils.DateUtils;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +13,7 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
+import javax.persistence.Transient;
 
 @Getter
 @Setter
@@ -29,28 +32,34 @@ public class BaseEntityAudit extends BaseEntity {
     @Column(name = "updated_by")
     private String updatedBy;
 
+    @Transient
+    private String currentUser;
+
     public BaseEntityAudit(BaseEntity baseEntity) {
         super(baseEntity.getDeleted());
     }
 
     public BaseEntityAudit(BaseEntity baseEntity,
-                           String createdBy, String updatedBy){
+                           String currentUser){
         this(baseEntity);
-        if (!StringUtils.isEmpty(createdBy)){
-            this.createdBy = createdBy;
+        if (!StringUtils.isEmpty(currentUser)){
+            this.currentUser = currentUser;
+        } else {
+            throw ExceptionFactory.create(ExceptionType.INTERNAL_SERVER_ERROR,
+                    "currentUser is null or empty");
         }
-        if (!StringUtils.isEmpty(updatedBy)){
-            this.updatedBy = updatedBy;
-        }
+
     }
 
     @PrePersist
-    public void setCreateDate() {
+    public void setCreate() {
         this.createdDate = DateUtils.getCurrentZonedDateTime();
+        this.createdBy = currentUser;
     }
 
     @PreUpdate
-    public void setUpdateDate() {
+    public void setUpdate() {
         this.updateDate = DateUtils.getCurrentZonedDateTime();
+        this.updatedBy = currentUser;
     }
 }

@@ -1,5 +1,6 @@
 package com.unonothing.usermgmt.service;
 
+import com.unonothing.common.utils.CurrentUser;
 import com.unonothing.usermgmt.dto.UserInfoDTO;
 import com.unonothing.usermgmt.marshall.UserInfoMarshaller;
 import com.unonothing.usermgmt.model.UserInfo;
@@ -20,7 +21,7 @@ public class UserInfoService implements IUserInfoService {
     @Override
     public void create(UserInfoDTO userInfoDTO) {
 
-        UserInfo userInfo = UserInfoMarshaller.unmarshall(userInfoDTO);
+        UserInfo userInfo = UserInfoMarshaller.unmarshall(userInfoDTO, CurrentUser.get());
 
         userInfoRepository.save(userInfo);
 

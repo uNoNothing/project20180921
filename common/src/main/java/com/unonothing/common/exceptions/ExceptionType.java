@@ -8,9 +8,12 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor
 public enum ExceptionType {
 
+
+    // BAD_REQUEST for all input error
+    // INTERNAL_SERVER_ERROR for all server error
+
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "{0}"),
-    ENUM_ERROR(HttpStatus.BAD_REQUEST, "Invalid {0}"),
-    INPUT_VALIDATION_FAIL(HttpStatus.NOT_ACCEPTABLE, "Input validation failed: {0} = {1}. {2}");
+    BAD_REQUEST(HttpStatus.BAD_REQUEST, "Input validation failed: {0}: {1}");
 
     private HttpStatus status;
     private String message;

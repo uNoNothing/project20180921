@@ -28,17 +28,17 @@ public class BaseEntityAuditMarshaller {
         return baseEntityAuditDTO;
     }
 
-    public static BaseEntityAudit unmarshall(BaseEntityAuditDTO baseEntityAuditDTO) {
+    public static BaseEntityAudit unmarshall(BaseEntityAuditDTO baseEntityAuditDTO, String currentUser) {
 
         BaseEntity baseEntity = BaseEntityMarshaller.unmarshall(baseEntityAuditDTO);
 
-        BaseEntityAudit baseEntityAudit = new BaseEntityAudit(baseEntity);
-        if (baseEntityAuditDTO.getCreatedBy() != null) {
-            baseEntityAudit.setCreatedBy(baseEntityAuditDTO.getCreatedBy());
-        }
-        if (baseEntityAuditDTO.getUpdatedBy() != null) {
-            baseEntityAudit.setUpdatedBy(baseEntityAuditDTO.getUpdatedBy());
-        }
+        BaseEntityAudit baseEntityAudit = new BaseEntityAudit(baseEntity, currentUser);
+//        if (baseEntityAuditDTO.getCreatedBy() != null) {
+//            baseEntityAudit.setCreatedBy(baseEntityAuditDTO.getCreatedBy());
+//        }
+//        if (baseEntityAuditDTO.getUpdatedBy() != null) {
+//            baseEntityAudit.setUpdatedBy(baseEntityAuditDTO.getUpdatedBy());
+//        }
 
         return baseEntityAudit;
 

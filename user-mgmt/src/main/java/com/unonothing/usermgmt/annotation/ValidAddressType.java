@@ -1,4 +1,6 @@
-package com.unonothing.usermgmt.enums.validator;
+package com.unonothing.usermgmt.annotation;
+
+import com.unonothing.usermgmt.validator.AddressTypeValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

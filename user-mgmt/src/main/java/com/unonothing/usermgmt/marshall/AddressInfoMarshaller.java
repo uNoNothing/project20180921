@@ -57,23 +57,17 @@ public class AddressInfoMarshaller {
         return addressInfoDTO;
     }
 
-    public static List<AddressInfo> unmarshall(List<AddressInfoDTO> addressInfoDTOList, UserInfo userInfo) {
+    public static List<AddressInfo> unmarshall(List<AddressInfoDTO> addressInfoDTOList, UserInfo userInfo, String currentUser) {
         List<AddressInfo> addressInfoList = new ArrayList<>();
         for (AddressInfoDTO addressInfoDTO : addressInfoDTOList) {
-            addressInfoList.add(unmarshall(addressInfoDTO, userInfo));
+            addressInfoList.add(unmarshall(addressInfoDTO, userInfo, currentUser));
         }
         return addressInfoList;
     }
 
-    private static AddressInfo unmarshall(AddressInfoDTO addressInfoDTO, UserInfo userInfo) {
+    private static AddressInfo unmarshall(AddressInfoDTO addressInfoDTO, UserInfo userInfo, String currentUser) {
 
-        if (!StringUtils.isEmpty(userInfo.getCreatedBy())) {
-            addressInfoDTO.setCreatedBy(userInfo.getCreatedBy());
-        }
-        if (!StringUtils.isEmpty(userInfo.getUpdatedBy())) {
-            addressInfoDTO.setUpdatedBy(userInfo.getUpdatedBy());
-        }
-        PersonalInfo personalInfo = PersonalInfoMarshaller.unmarshall(addressInfoDTO);
+        PersonalInfo personalInfo = PersonalInfoMarshaller.unmarshall(addressInfoDTO, currentUser);
 
         AddressInfo addressInfo = new AddressInfo(personalInfo);
 

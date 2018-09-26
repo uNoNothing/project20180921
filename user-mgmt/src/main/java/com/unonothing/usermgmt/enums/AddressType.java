@@ -23,6 +23,6 @@ public enum AddressType {
                 return addressType;
             }
         }
-        throw ExceptionFactory.create(ExceptionType.ENUM_ERROR, "address type");
+        throw ExceptionFactory.create(ExceptionType.BAD_REQUEST, "Address type", type);
     }
 }

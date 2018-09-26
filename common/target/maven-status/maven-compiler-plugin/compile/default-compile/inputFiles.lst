@@ -1,6 +1,7 @@
 X:\workspace\project20180921\common\src\main\java\com\unonothing\common\marshall\BaseEntityAuditMarshaller.java
 X:\workspace\project20180921\common\src\main\java\com\unonothing\common\dto\BaseEntityAuditDTO.java
 X:\workspace\project20180921\common\src\main\java\com\unonothing\common\marshall\BaseEntityMarshaller.java
+X:\workspace\project20180921\common\src\main\java\com\unonothing\common\utils\CurrentUser.java
 X:\workspace\project20180921\common\src\main\java\com\unonothing\common\model\BaseEntityAudit.java
 X:\workspace\project20180921\common\src\main\java\com\unonothing\common\exceptions\ExceptionType.java
 X:\workspace\project20180921\common\src\main\java\com\unonothing\common\exceptions\ExceptionFactory.java

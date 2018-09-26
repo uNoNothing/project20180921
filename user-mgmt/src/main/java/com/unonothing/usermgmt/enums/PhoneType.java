@@ -26,6 +26,6 @@ public enum PhoneType {
                 return phoneType;
             }
         }
-        throw ExceptionFactory.create(ExceptionType.ENUM_ERROR, "phone type");
+        throw ExceptionFactory.create(ExceptionType.BAD_REQUEST, "Phone type", type);
     }
 }

@@ -17,9 +17,9 @@ public class PersonalInfoMarshaller {
         return personalInfoDTO;
     }
 
-    public static PersonalInfo unmarshall(PersonalInfoDTO personalInfoDTO){
+    public static PersonalInfo unmarshall(PersonalInfoDTO personalInfoDTO, String currentUser){
 
-        BaseEntityAudit baseEntityAudit = BaseEntityAuditMarshaller.unmarshall(personalInfoDTO);
+        BaseEntityAudit baseEntityAudit = BaseEntityAuditMarshaller.unmarshall(personalInfoDTO, currentUser);
 
         PersonalInfo personalInfo = new PersonalInfo(baseEntityAudit, personalInfoDTO.getPreferred());
 

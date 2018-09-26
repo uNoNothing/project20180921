@@ -14,6 +14,7 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.Valid;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -27,7 +28,7 @@ import java.util.List;
 public class UserInfo extends BaseEntityAudit {
 
     @Column(name = "username", updatable = false)
-    @Size(min = 8)
+    @Size(min = 4, max = 255)
     private String userName;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userInfo", fetch = FetchType.LAZY)
@@ -48,7 +49,7 @@ public class UserInfo extends BaseEntityAudit {
 
     public UserInfo(BaseEntityAudit baseEntityAudit) {
         super(new BaseEntity(baseEntityAudit.getDeleted()),
-                baseEntityAudit.getCreatedBy(), baseEntityAudit.getUpdatedBy());
+                baseEntityAudit.getCurrentUser());
     }
 
     public UserInfo(BaseEntityAudit baseEntityAudit, String userName) {

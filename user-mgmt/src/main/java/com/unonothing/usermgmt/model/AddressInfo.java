@@ -27,29 +27,31 @@ import javax.validation.constraints.Size;
 public class AddressInfo extends PersonalInfo {
 
     @Column(name = "address1", nullable = false)
-    @Size(min = 2)
+    @Size(min = 2, max = 255)
     private String address1;
 
     @Column(name = "address2")
+    @Size(max = 255)
     private String address2;
 
     @Column(name = "address3")
+    @Size(max = 255)
     private String address3;
 
     @Column(name = "city", nullable = false)
-    @Size(min = 2)
+    @Size(min = 2, max = 255)
     private String city;
 
     @Column(name = "state", nullable = false)
-    @Size(min = 2)
+    @Size(min = 2, max = 255)
     private String state;
 
     @Column(name = "country", nullable = false)
-    @Size(min = 2)
+    @Size(min = 2, max = 255)
     private String country;
 
     @Column(name = "zip", nullable = false)
-    @Size(min = 2)
+    @Size(min = 2, max = 255)
     private String zip;
 
     @Convert(converter = AddressTypeConverter.class)
@@ -66,7 +68,7 @@ public class AddressInfo extends PersonalInfo {
 
     public AddressInfo(PersonalInfo personalInfo) {
         super(new BaseEntityAudit(new BaseEntity(personalInfo.getDeleted()),
-                        personalInfo.getCreatedBy(), personalInfo.getUpdatedBy()),
+                        personalInfo.getCurrentUser()),
                 personalInfo.getPreferred());
     }
 }
