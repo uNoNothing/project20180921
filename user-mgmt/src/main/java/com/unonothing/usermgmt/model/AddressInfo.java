@@ -2,12 +2,13 @@ package com.unonothing.usermgmt.model;
 
 import com.unonothing.common.model.BaseEntity;
 import com.unonothing.common.model.BaseEntityAudit;
+import com.unonothing.usermgmt.converter.AddressTypeConverter;
 import com.unonothing.usermgmt.enums.AddressType;
-import com.unonothing.usermgmt.enums.converter.AddressTypeConverter;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -24,6 +25,7 @@ import javax.validation.constraints.Size;
 @Setter
 @NoArgsConstructor
 @ToString
+@Where(clause = "deleted='false'")
 public class AddressInfo extends PersonalInfo {
 
     @Column(name = "address1", nullable = false)
@@ -67,8 +69,7 @@ public class AddressInfo extends PersonalInfo {
     private UserInfo userInfo;
 
     public AddressInfo(PersonalInfo personalInfo) {
-        super(new BaseEntityAudit(new BaseEntity(personalInfo.getDeleted()),
-                        personalInfo.getCurrentUser()),
+        super(new BaseEntityAudit(new BaseEntity(personalInfo.getDeleted())),
                 personalInfo.getPreferred());
     }
 }

@@ -1,7 +1,7 @@
 package com.unonothing.usermgmt.validator;
 
 import com.unonothing.usermgmt.annotation.ValidEmailType;
-import com.unonothing.usermgmt.enums.converter.EmailTypeConverter;
+import com.unonothing.usermgmt.converter.EmailTypeConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 

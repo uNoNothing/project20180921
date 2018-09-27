@@ -21,8 +21,7 @@ public class PersonalInfo extends BaseEntityAudit {
     private Boolean preferred = false;
 
     public PersonalInfo(BaseEntityAudit baseEntityAudit) {
-        super(new BaseEntity(baseEntityAudit.getDeleted()),
-                baseEntityAudit.getCurrentUser());
+        super(new BaseEntity(baseEntityAudit.getDeleted()));
     }
 
     public PersonalInfo(BaseEntityAudit baseEntityAudit, Boolean preferred) {

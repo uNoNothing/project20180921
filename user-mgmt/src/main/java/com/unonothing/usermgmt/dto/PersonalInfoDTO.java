@@ -1,7 +1,7 @@
 package com.unonothing.usermgmt.dto;
 
-import com.unonothing.common.dto.BaseEntityAuditDTO;
-import com.unonothing.common.dto.BaseEntityDTO;
+import com.unonothing.common.dto.BaseAuditDTO;
+import com.unonothing.common.dto.BaseDTO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,18 +12,16 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-public class PersonalInfoDTO extends BaseEntityAuditDTO {
+public class PersonalInfoDTO extends BaseAuditDTO {
 
     @ApiModelProperty(notes = "true if address or email or phone is preferred one")
     private Boolean preferred = false;
 
-    public PersonalInfoDTO(BaseEntityAuditDTO baseEntityAuditDTO) {
-        super(new BaseEntityDTO(baseEntityAuditDTO.getId(), baseEntityAuditDTO.getDeleted()),
-                baseEntityAuditDTO.getCreatedDate(), baseEntityAuditDTO.getCreatedBy(),
-                baseEntityAuditDTO.getUpdatedDate(), baseEntityAuditDTO.getUpdatedBy());
+    public PersonalInfoDTO(BaseAuditDTO baseEntityAuditDTO) {
+        super(new BaseDTO(baseEntityAuditDTO.getId(), baseEntityAuditDTO.getDeleted()));
     }
 
-    public PersonalInfoDTO(BaseEntityAuditDTO baseEntityAuditDTO, Boolean preferred) {
+    public PersonalInfoDTO(BaseAuditDTO baseEntityAuditDTO, Boolean preferred) {
         this(baseEntityAuditDTO);
         this.preferred = preferred;
     }

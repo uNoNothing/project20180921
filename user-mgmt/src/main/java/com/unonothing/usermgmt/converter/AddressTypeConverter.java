@@ -1,4 +1,4 @@
-package com.unonothing.usermgmt.enums.converter;
+package com.unonothing.usermgmt.converter;
 
 import com.unonothing.usermgmt.enums.AddressType;
 import com.unonothing.common.exceptions.ExceptionFactory;

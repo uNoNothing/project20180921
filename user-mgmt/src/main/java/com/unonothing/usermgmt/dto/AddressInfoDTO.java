@@ -24,7 +24,7 @@ public class AddressInfoDTO extends PersonalInfoDTO {
     private String address1;
 
     @ApiModelProperty(notes = "address2 is optional")
-    @Size(max = 5, message = "address2 max length 255")
+    @Size(max = 255, message = "address2 max length 255")
     private String address2;
 
     @ApiModelProperty(notes = "address3 is optional")

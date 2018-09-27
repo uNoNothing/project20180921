@@ -1,9 +1,12 @@
 package com.unonothing.usermgmt.model;
 
+import com.unonothing.common.model.BaseEntity;
+import com.unonothing.common.model.BaseEntityAudit;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,6 +22,7 @@ import javax.validation.constraints.Size;
 @Setter
 @NoArgsConstructor
 @ToString
+@Where(clause = "deleted='false'")
 public class NameInfo extends PersonalInfo {
 
     @Size(max = 255)
@@ -44,4 +48,9 @@ public class NameInfo extends PersonalInfo {
             nullable = false
     )
     private UserInfo userInfo;
+
+    public NameInfo(PersonalInfo personalInfo) {
+        super(new BaseEntityAudit(new BaseEntity(personalInfo.getDeleted())),
+                personalInfo.getPreferred());
+    }
 }

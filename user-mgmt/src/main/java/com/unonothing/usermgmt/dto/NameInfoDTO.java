@@ -37,4 +37,8 @@ public class NameInfoDTO extends PersonalInfoDTO {
 
     @ApiModelProperty(notes = "userId")
     private Integer userId;
+
+    public NameInfoDTO(PersonalInfoDTO personalInfoDTO) {
+        super(personalInfoDTO, personalInfoDTO.getPreferred());
+    }
 }

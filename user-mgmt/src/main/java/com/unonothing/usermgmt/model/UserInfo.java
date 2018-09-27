@@ -5,7 +5,7 @@ import com.unonothing.common.model.BaseEntityAudit;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,7 +14,7 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -24,10 +24,11 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
+@Where(clause = "deleted='false'")
 public class UserInfo extends BaseEntityAudit {
 
     @Column(name = "username", updatable = false)
+    @NotEmpty
     @Size(min = 4, max = 255)
     private String userName;
 
@@ -48,13 +49,11 @@ public class UserInfo extends BaseEntityAudit {
 
 
     public UserInfo(BaseEntityAudit baseEntityAudit) {
-        super(new BaseEntity(baseEntityAudit.getDeleted()),
-                baseEntityAudit.getCurrentUser());
+        super(new BaseEntity(baseEntityAudit.getDeleted()));
     }
 
     public UserInfo(BaseEntityAudit baseEntityAudit, String userName) {
         this(baseEntityAudit);
         this.userName = userName;
     }
-
 }

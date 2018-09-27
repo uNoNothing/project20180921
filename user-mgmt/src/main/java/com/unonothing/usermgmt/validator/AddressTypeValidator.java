@@ -1,9 +1,7 @@
 package com.unonothing.usermgmt.validator;
 
 import com.unonothing.usermgmt.annotation.ValidAddressType;
-import com.unonothing.usermgmt.enums.converter.AddressTypeConverter;
-import com.unonothing.common.exceptions.ExceptionFactory;
-import com.unonothing.common.exceptions.ExceptionType;
+import com.unonothing.usermgmt.converter.AddressTypeConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 

@@ -22,7 +22,6 @@ import java.io.Serializable;
 @ToString
 @EqualsAndHashCode(doNotUseGetters = true, onlyExplicitlyIncluded = true)
 @MappedSuperclass
-@Where(clause = "deleted = false")
 public class BaseEntity implements Serializable {
 
     @Id
@@ -32,6 +31,7 @@ public class BaseEntity implements Serializable {
     @EqualsAndHashCode.Include
     protected Integer id;
 
+    // soft delete
     @Column(name = "deleted", nullable = false)
     private Boolean deleted = false;
 

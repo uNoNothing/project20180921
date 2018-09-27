@@ -1,29 +1,29 @@
 package com.unonothing.common.marshall;
 
-import com.unonothing.common.dto.BaseEntityDTO;
+import com.unonothing.common.dto.BaseDTO;
 import com.unonothing.common.model.BaseEntity;
 
 public class BaseEntityMarshaller {
 
-    public static BaseEntityDTO marshall(BaseEntity baseEntity) {
+    public static BaseDTO marshall(BaseEntity baseEntity) {
 
-        BaseEntityDTO baseEntityDTO = new BaseEntityDTO();
+        BaseDTO baseDTO = new BaseDTO();
         if (baseEntity.getId() != null) {
-            baseEntityDTO.setId(baseEntity.getId());
+            baseDTO.setId(baseEntity.getId());
         }
         if (baseEntity.getDeleted()) {
-            baseEntityDTO.setDeleted(baseEntity.getDeleted());
+            baseDTO.setDeleted(baseEntity.getDeleted());
         }
 
-        return baseEntityDTO;
+        return baseDTO;
     }
 
-    public static BaseEntity unmarshall(BaseEntityDTO baseEntityDTO) {
+    public static BaseEntity unmarshall(BaseDTO baseDTO) {
 
         Boolean deleted;
 
-        if (baseEntityDTO.getDeleted() != null) {
-            deleted = baseEntityDTO.getDeleted();
+        if (baseDTO.getDeleted() != null) {
+            deleted = baseDTO.getDeleted();
         } else {
             deleted = false;
         }

@@ -14,21 +14,23 @@ import java.io.Serializable;
 @NoArgsConstructor
 @ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class BaseEntityDTO implements Serializable {
+public class BaseDTO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(notes = "id, system generated")
     private Integer id;
 
     // for exceptions
     @ApiModelProperty(notes = "error, system generated")
-    private Boolean error = false;
+    private Boolean error;
     @ApiModelProperty(notes = "error message, system generated")
-    private String message = "No error";
+    private String message;
 
     @ApiModelProperty(notes = "true if object is deleted or to be deleted")
     private Boolean deleted;
 
-    public BaseEntityDTO(Integer id, Boolean deleted) {
+    public BaseDTO(Integer id, Boolean deleted) {
         this.id = id;
         this.deleted = deleted;
     }

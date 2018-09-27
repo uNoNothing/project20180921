@@ -1,6 +1,6 @@
 package com.unonothing.usermgmt.marshall;
 
-import com.unonothing.common.dto.BaseEntityAuditDTO;
+import com.unonothing.common.dto.BaseAuditDTO;
 import com.unonothing.common.marshall.BaseEntityAuditMarshaller;
 import com.unonothing.common.model.BaseEntityAudit;
 import com.unonothing.usermgmt.dto.UserInfoDTO;
@@ -22,9 +22,9 @@ public class UserInfoMarshaller {
         return userInfoDTOList;
     }
 
-    private static UserInfoDTO marshall(UserInfo userInfo) {
+    public static UserInfoDTO marshall(UserInfo userInfo) {
 
-        BaseEntityAuditDTO baseEntityAuditDTO = BaseEntityAuditMarshaller.marshall(userInfo);
+        BaseAuditDTO baseEntityAuditDTO = BaseEntityAuditMarshaller.marshall(userInfo);
 
         UserInfoDTO userInfoDTO = new UserInfoDTO(baseEntityAuditDTO, userInfo.getUserName());
 
@@ -32,17 +32,37 @@ public class UserInfoMarshaller {
             userInfoDTO.setAddressList(AddressInfoMarshaller.marshall(userInfo.getAddressInfoList()));
         }
 
+        if (!CollectionUtils.isEmpty(userInfo.getNameInfoList())) {
+            userInfoDTO.setNameList(NameInfoMarshaller.marshall(userInfo.getNameInfoList()));
+        }
+
+        if (!CollectionUtils.isEmpty(userInfo.getEmailInfoList())) {
+            userInfoDTO.setEmailList(EmailInfoMarshaller.marshall(userInfo.getEmailInfoList()));
+        }
+
+        if (!CollectionUtils.isEmpty(userInfo.getPhoneInfoList())) {
+            userInfoDTO.setPhoneList(PhoneInfoMarshaller.marshall(userInfo.getPhoneInfoList()));
+        }
+
         return userInfoDTO;
     }
 
-    public static UserInfo unmarshall(UserInfoDTO userInfoDTO, String currentUser) {
+    public static UserInfo unmarshall(UserInfoDTO userInfoDTO) {
 
-        BaseEntityAudit baseEntityAudit = BaseEntityAuditMarshaller.unmarshall(userInfoDTO, currentUser);
+        BaseEntityAudit baseEntityAudit = BaseEntityAuditMarshaller.unmarshall(userInfoDTO);
 
         UserInfo userInfo = new UserInfo(baseEntityAudit, userInfoDTO.getUserName());
 
         if (!CollectionUtils.isEmpty(userInfoDTO.getAddressList())) {
-            userInfo.setAddressInfoList(AddressInfoMarshaller.unmarshall(userInfoDTO.getAddressList(), userInfo, currentUser));
+            userInfo.setAddressInfoList(AddressInfoMarshaller.unmarshall(userInfoDTO.getAddressList(), userInfo));
+        }
+
+        if (!CollectionUtils.isEmpty(userInfoDTO.getNameList())) {
+            userInfo.setNameInfoList(NameInfoMarshaller.unmarshall(userInfoDTO.getNameList(), userInfo));
+        }
+
+        if (!CollectionUtils.isEmpty(userInfoDTO.getEmailList())) {
+            userInfo.setEmailInfoList(EmailInfoMarshaller.unmarshall(userInfoDTO.getEmailList(), userInfo));
         }
 
         return userInfo;

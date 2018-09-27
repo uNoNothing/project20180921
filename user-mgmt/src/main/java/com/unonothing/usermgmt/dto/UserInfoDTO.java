@@ -1,14 +1,13 @@
 package com.unonothing.usermgmt.dto;
 
-import com.unonothing.common.dto.BaseEntityAuditDTO;
-import com.unonothing.common.dto.BaseEntityDTO;
+import com.unonothing.common.dto.BaseAuditDTO;
+import com.unonothing.common.dto.BaseDTO;
 import com.unonothing.usermgmt.annotation.ValidUserName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
@@ -18,9 +17,8 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
 @ApiModel(description = "User info")
-public class UserInfoDTO extends BaseEntityAuditDTO {
+public class UserInfoDTO extends BaseAuditDTO {
 
     @ApiModelProperty(notes = "userName should have at least 4 characters")
     @NotEmpty
@@ -28,29 +26,28 @@ public class UserInfoDTO extends BaseEntityAuditDTO {
     @ValidUserName
     private String userName;
 
-//    @ApiModelProperty(notes = "name info list")
-//    @Valid
-//    private List<NameInfoDTO> nameList;
+    @ApiModelProperty(notes = "name info list")
+    @NotEmpty
+    @Valid
+    private List<NameInfoDTO> nameList;
 
     @ApiModelProperty(notes = "address list")
     @Valid
     private List<AddressInfoDTO> addressList;
 
-//    @ApiModelProperty(notes = "email address list")
-//    @Valid
-//    private List<EmailInfoDTO> emailList;
+    @ApiModelProperty(notes = "email address list")
+    @Valid
+    private List<EmailInfoDTO> emailList;
 
-//    @ApiModelProperty(notes = "phone number list")
-//    @Valid
-//    private List<PhoneInfoDTO> phoneList;
+    @ApiModelProperty(notes = "phone number list")
+    @Valid
+    private List<PhoneInfoDTO> phoneList;
 
-    public UserInfoDTO(BaseEntityAuditDTO baseEntityAuditDTO) {
-        super(new BaseEntityDTO(baseEntityAuditDTO.getId(), baseEntityAuditDTO.getDeleted()),
-                baseEntityAuditDTO.getCreatedDate(), baseEntityAuditDTO.getCreatedBy(),
-                baseEntityAuditDTO.getUpdatedDate(), baseEntityAuditDTO.getUpdatedBy());
+    public UserInfoDTO(BaseAuditDTO baseEntityAuditDTO) {
+        super(new BaseDTO(baseEntityAuditDTO.getId(), baseEntityAuditDTO.getDeleted()));
     }
 
-    public UserInfoDTO(BaseEntityAuditDTO baseEntityAuditDTO, String userName) {
+    public UserInfoDTO(BaseAuditDTO baseEntityAuditDTO, String userName) {
         this(baseEntityAuditDTO);
         this.userName = userName;
     }

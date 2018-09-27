@@ -1,13 +1,14 @@
-package com.unonothing.usermgmt.enums.converter;
+package com.unonothing.usermgmt.converter;
 
-import com.unonothing.usermgmt.enums.EmailType;
 import com.unonothing.common.exceptions.ExceptionFactory;
 import com.unonothing.common.exceptions.ExceptionType;
+import com.unonothing.usermgmt.enums.EmailType;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
-
+@Component
 @Converter(autoApply = true)
 public class EmailTypeConverter implements AttributeConverter<EmailType, String> {
 

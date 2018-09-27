@@ -9,3 +9,10 @@ spring.datasource.password: project20180921Secret@
 spring.jpa.show-sql: true
 spring.jpa.hibernate.ddl-auto: create-drop
 spring.jpa.database: default
+
+## LOGGING ##
+logging.level.root: ERROR
+logging.level.com.unonothing: TRACE
+
+## COLORIZED LOG ##
+spring.output.ansi.enabled: ALWAYS

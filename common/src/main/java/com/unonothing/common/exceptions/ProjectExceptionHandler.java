@@ -1,6 +1,6 @@
 package com.unonothing.common.exceptions;
 
-import com.unonothing.common.dto.BaseEntityDTO;
+import com.unonothing.common.dto.BaseDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -12,6 +12,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import javax.validation.ValidationException;
 
 
 @ControllerAdvice("com.unonothing")
@@ -19,21 +20,19 @@ public class ProjectExceptionHandler extends ResponseEntityExceptionHandler {
 
     private final static Logger log = LoggerFactory.getLogger(ExceptionHandler.class);
 
-    // catch exceptions raised in project
-    @ExceptionHandler(ProjectException.class)
-    public ResponseEntity<BaseEntityDTO> handleProjectException(ProjectException ex) {
 
-        if (ex.getHttpStatus().compareTo(HttpStatus.BAD_REQUEST) == 0) {
-            log.error("Exception caught at handleProjectException.");
-        } else {
-            log.error("Exception caught at handleProjectException.", ex);
-        }
-        return handler(ex.getMessage(), ex.getHttpStatus());
+    // catch validation exceptions
+    @ExceptionHandler(ValidationException.class)
+    public ResponseEntity<BaseDTO> handleValidationException(ValidationException ex) {
+
+        log.error("Exception caught at handleValidationException.");
+
+        return handler(ex.getCause().getMessage(), HttpStatus.BAD_REQUEST);
     }
 
     // catch null pointer exception
     @ExceptionHandler(NullPointerException.class)
-    public ResponseEntity<BaseEntityDTO> handleNullPointerException(NullPointerException ex) {
+    public ResponseEntity<BaseDTO> handleNullPointerException(NullPointerException ex) {
 
         log.error("Exception caught at handleNullPointerException.", ex);
         return handler(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -41,15 +40,16 @@ public class ProjectExceptionHandler extends ResponseEntityExceptionHandler {
 
     // catch SQL Data Integrity Violation Exception
     @ExceptionHandler(DataIntegrityViolationException.class)
-    public ResponseEntity<BaseEntityDTO> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
+    public ResponseEntity<BaseDTO> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
 
         log.error("Exception caught at handleDataIntegrityViolationException.");
         return handler(ex.getCause().getCause().getMessage(), HttpStatus.BAD_REQUEST);
     }
 
+
     // catch SQL Constraint Violation Exception
     @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<BaseEntityDTO> handleConstraintViolationException(ConstraintViolationException ex) {
+    public ResponseEntity<BaseDTO> handleConstraintViolationException(ConstraintViolationException ex) {
 
         log.error("Exception caught at handleConstraintViolationException.");
 
@@ -67,29 +67,41 @@ public class ProjectExceptionHandler extends ResponseEntityExceptionHandler {
         log.error(errorMessage);
 
         return handler(errorMessage, HttpStatus.BAD_REQUEST);
-//        return handler(ex.getCause().getCause().getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    // catch exceptions raised in project
+    @ExceptionHandler(ProjectException.class)
+    public ResponseEntity<BaseDTO> handleProjectException(ProjectException ex) {
+
+        if ((ex.getHttpStatus().compareTo(HttpStatus.BAD_REQUEST) == 0)
+                || (ex.getHttpStatus().compareTo(HttpStatus.NO_CONTENT) == 0)) {
+            log.error("Exception caught at handleProjectException.");
+        } else {
+            log.error("Exception caught at handleProjectException.", ex);
+        }
+        return handler(ex.getMessage(), ex.getHttpStatus());
     }
 
     // catch all other exception
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<BaseEntityDTO> handleException(Exception ex) {
+    public ResponseEntity<BaseDTO> handleException(Exception ex) {
 
         log.error("Exception caught at handleException.", ex);
         return handler(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    private ResponseEntity<BaseEntityDTO> handler(String message, HttpStatus httpStatus) {
+    private ResponseEntity<BaseDTO> handler(String message, HttpStatus httpStatus) {
         return new ResponseEntity<>(createBaseDTO(message), httpStatus);
     }
 
-    private BaseEntityDTO createBaseDTO(String message) {
+    private BaseDTO createBaseDTO(String message) {
 //        log.error(ex.getMessage());
 
-        BaseEntityDTO baseEntityDTO = new BaseEntityDTO();
-        baseEntityDTO.setError(true);
-        baseEntityDTO.setMessage(message);
+        BaseDTO baseDTO = new BaseDTO();
+        baseDTO.setError(true);
+        baseDTO.setMessage(message);
 
-        return baseEntityDTO;
+        return baseDTO;
     }
 
 

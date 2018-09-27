@@ -1,17 +1,17 @@
 package com.unonothing.common.marshall;
 
-import com.unonothing.common.dto.BaseEntityAuditDTO;
-import com.unonothing.common.dto.BaseEntityDTO;
+import com.unonothing.common.dto.BaseAuditDTO;
+import com.unonothing.common.dto.BaseDTO;
 import com.unonothing.common.model.BaseEntity;
 import com.unonothing.common.model.BaseEntityAudit;
 
 public class BaseEntityAuditMarshaller {
 
-    public static BaseEntityAuditDTO marshall(BaseEntityAudit baseEntityAudit) {
+    public static BaseAuditDTO marshall(BaseEntityAudit baseEntityAudit) {
 
-        BaseEntityDTO baseEntityDTO = BaseEntityMarshaller.marshall(baseEntityAudit);
+        BaseDTO baseDTO = BaseEntityMarshaller.marshall(baseEntityAudit);
 
-        BaseEntityAuditDTO baseEntityAuditDTO = new BaseEntityAuditDTO(baseEntityDTO);
+        BaseAuditDTO baseEntityAuditDTO = new BaseAuditDTO(baseDTO);
         if (baseEntityAudit.getCreatedBy() != null) {
             baseEntityAuditDTO.setCreatedBy(baseEntityAudit.getCreatedBy());
         }
@@ -28,17 +28,11 @@ public class BaseEntityAuditMarshaller {
         return baseEntityAuditDTO;
     }
 
-    public static BaseEntityAudit unmarshall(BaseEntityAuditDTO baseEntityAuditDTO, String currentUser) {
+    public static BaseEntityAudit unmarshall(BaseAuditDTO baseEntityAuditDTO) {
 
         BaseEntity baseEntity = BaseEntityMarshaller.unmarshall(baseEntityAuditDTO);
 
-        BaseEntityAudit baseEntityAudit = new BaseEntityAudit(baseEntity, currentUser);
-//        if (baseEntityAuditDTO.getCreatedBy() != null) {
-//            baseEntityAudit.setCreatedBy(baseEntityAuditDTO.getCreatedBy());
-//        }
-//        if (baseEntityAuditDTO.getUpdatedBy() != null) {
-//            baseEntityAudit.setUpdatedBy(baseEntityAuditDTO.getUpdatedBy());
-//        }
+        BaseEntityAudit baseEntityAudit = new BaseEntityAudit(baseEntity);
 
         return baseEntityAudit;
 

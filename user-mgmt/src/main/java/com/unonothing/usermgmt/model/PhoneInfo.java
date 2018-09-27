@@ -1,11 +1,14 @@
 package com.unonothing.usermgmt.model;
 
+import com.unonothing.common.model.BaseEntity;
+import com.unonothing.common.model.BaseEntityAudit;
 import com.unonothing.usermgmt.enums.PhoneType;
-import com.unonothing.usermgmt.enums.converter.PhoneTypeConverter;
+import com.unonothing.usermgmt.converter.PhoneTypeConverter;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -22,6 +25,7 @@ import javax.validation.constraints.Size;
 @Setter
 @NoArgsConstructor
 @ToString
+@Where(clause = "deleted='false'")
 public class PhoneInfo extends PersonalInfo {
 
     @Column(name = "phone")
@@ -39,4 +43,9 @@ public class PhoneInfo extends PersonalInfo {
             nullable = false
     )
     private UserInfo userInfo;
+
+    public PhoneInfo(PersonalInfo personalInfo) {
+        super(new BaseEntityAudit(new BaseEntity(personalInfo.getDeleted())),
+                personalInfo.getPreferred());
+    }
 }

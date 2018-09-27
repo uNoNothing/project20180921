@@ -1,13 +1,11 @@
 package com.unonothing.common.model;
 
-import com.unonothing.common.exceptions.ExceptionFactory;
-import com.unonothing.common.exceptions.ExceptionType;
+import com.unonothing.common.utils.CurrentUser;
 import com.unonothing.common.utils.DateUtils;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.util.StringUtils;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
@@ -39,27 +37,15 @@ public class BaseEntityAudit extends BaseEntity {
         super(baseEntity.getDeleted());
     }
 
-    public BaseEntityAudit(BaseEntity baseEntity,
-                           String currentUser){
-        this(baseEntity);
-        if (!StringUtils.isEmpty(currentUser)){
-            this.currentUser = currentUser;
-        } else {
-            throw ExceptionFactory.create(ExceptionType.INTERNAL_SERVER_ERROR,
-                    "currentUser is null or empty");
-        }
-
-    }
-
     @PrePersist
     public void setCreate() {
         this.createdDate = DateUtils.getCurrentZonedDateTime();
-        this.createdBy = currentUser;
+        this.createdBy = CurrentUser.get();
     }
 
     @PreUpdate
     public void setUpdate() {
         this.updateDate = DateUtils.getCurrentZonedDateTime();
-        this.updatedBy = currentUser;
+        this.updatedBy = CurrentUser.get();
     }
 }

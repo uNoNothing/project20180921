@@ -1,12 +1,14 @@
-package com.unonothing.usermgmt.enums.converter;
+package com.unonothing.usermgmt.converter;
 
 import com.unonothing.usermgmt.enums.PhoneType;
 import com.unonothing.common.exceptions.ExceptionFactory;
 import com.unonothing.common.exceptions.ExceptionType;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
+@Component
 @Converter(autoApply = true)
 public class PhoneTypeConverter implements AttributeConverter<PhoneType, String> {
 

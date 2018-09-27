@@ -1,10 +1,14 @@
 package com.unonothing.usermgmt.model;
 
-import com.unonothing.usermgmt.enums.converter.EmailTypeConverter;
+import com.unonothing.common.model.BaseEntity;
+import com.unonothing.common.model.BaseEntityAudit;
+import com.unonothing.usermgmt.converter.EmailTypeConverter;
+import com.unonothing.usermgmt.enums.EmailType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -22,6 +26,7 @@ import javax.validation.constraints.Size;
 @Setter
 @NoArgsConstructor
 @ToString
+@Where(clause = "deleted='false'")
 public class EmailInfo extends PersonalInfo {
 
     @Column(name = "email", nullable = false)
@@ -31,7 +36,7 @@ public class EmailInfo extends PersonalInfo {
 
     @Convert(converter = EmailTypeConverter.class)
     @Column(name = "type", nullable = false)
-    private String type;
+    private EmailType type;
 
     @ManyToOne
     @JoinColumn(
@@ -40,4 +45,9 @@ public class EmailInfo extends PersonalInfo {
             nullable = false
     )
     private UserInfo userInfo;
+
+    public EmailInfo(PersonalInfo personalInfo) {
+        super(new BaseEntityAudit(new BaseEntity(personalInfo.getDeleted())),
+                personalInfo.getPreferred());
+    }
 }

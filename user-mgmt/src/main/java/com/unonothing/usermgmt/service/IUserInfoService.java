@@ -1,5 +1,6 @@
 package com.unonothing.usermgmt.service;
 
+import com.unonothing.common.dto.BaseDTO;
 import com.unonothing.usermgmt.dto.UserInfoDTO;
 
 import java.util.List;
@@ -9,9 +10,9 @@ public interface IUserInfoService {
 
     List<UserInfoDTO> read();
 
-//    UserInfoDTO read(Integer id);
+    UserInfoDTO read(BaseDTO baseDTO);
 
 //    void update(UserInfoDTO userInfoDTO);
 
-//    void delete(Integer id);
+    void delete(BaseDTO baseDTO);
 }
