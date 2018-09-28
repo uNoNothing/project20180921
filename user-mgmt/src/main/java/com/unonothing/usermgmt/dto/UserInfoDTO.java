@@ -44,7 +44,7 @@ public class UserInfoDTO extends BaseAuditDTO {
     private List<PhoneInfoDTO> phoneList;
 
     public UserInfoDTO(BaseAuditDTO baseEntityAuditDTO) {
-        super(new BaseDTO(baseEntityAuditDTO.getId(), baseEntityAuditDTO.getDeleted()));
+        super(new BaseDTO(baseEntityAuditDTO.getId(), baseEntityAuditDTO.getDisabled()));
     }
 
     public UserInfoDTO(BaseAuditDTO baseEntityAuditDTO, String userName) {

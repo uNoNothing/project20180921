@@ -3,7 +3,10 @@ package com.unonothing.usermgmt.service;
 import com.unonothing.common.dto.BaseDTO;
 import com.unonothing.common.exceptions.ExceptionFactory;
 import com.unonothing.common.exceptions.ExceptionType;
+import com.unonothing.usermgmt.dto.PersonalInfoDTO;
 import com.unonothing.usermgmt.dto.UserInfoDTO;
+import com.unonothing.usermgmt.helper.EnsureOneNameInfo;
+import com.unonothing.usermgmt.helper.EnsureOnePreferred;
 import com.unonothing.usermgmt.marshall.UserInfoMarshaller;
 import com.unonothing.usermgmt.model.AddressInfo;
 import com.unonothing.usermgmt.model.EmailInfo;
@@ -30,6 +33,15 @@ public class UserInfoService implements IUserInfoService {
     @Transactional
     public void create(UserInfoDTO userInfoDTO) {
 
+        // check if more than one nameInfo sent
+        EnsureOneNameInfo.check(userInfoDTO.getNameList());
+
+        // only one set should have 'preferred' as true
+        // in address, email, and phone
+        EnsureOnePreferred.check((List<PersonalInfoDTO>) (Object) userInfoDTO.getAddressList(), "address");
+        EnsureOnePreferred.check((List<PersonalInfoDTO>) (Object) userInfoDTO.getEmailList(), "email");
+        EnsureOnePreferred.check((List<PersonalInfoDTO>) (Object) userInfoDTO.getPhoneList(), "phone");
+
         UserInfo userInfo = UserInfoMarshaller.unmarshall(userInfoDTO);
 
         userInfoRepository.save(userInfo);
@@ -52,33 +64,33 @@ public class UserInfoService implements IUserInfoService {
     }
 
     @Override
-    public void delete(BaseDTO baseDTO) {
+    public void disable(BaseDTO baseDTO) {
         Optional<UserInfo> userInfo = userInfoRepository.findById(baseDTO.getId());
 
         if (userInfo.isPresent()) {
             UserInfo userInfo1 = userInfo.get();
 
             // soft delete
-            userInfo1.setDeleted(true);
+            userInfo1.setDisabled(true);
 
             List<NameInfo> nameInfoList = userInfo1.getNameInfoList();
             if (!CollectionUtils.isEmpty(nameInfoList)) {
-                nameInfoList.forEach(nameInfo -> nameInfo.setDeleted(true));
+                nameInfoList.forEach(nameInfo -> nameInfo.setDisabled(true));
             }
 
             List<AddressInfo> addressInfoList = userInfo1.getAddressInfoList();
             if (!CollectionUtils.isEmpty(addressInfoList)) {
-                addressInfoList.forEach(addressInfo -> addressInfo.setDeleted(true));
+                addressInfoList.forEach(addressInfo -> addressInfo.setDisabled(true));
             }
 
             List<EmailInfo> emailInfoList = userInfo1.getEmailInfoList();
             if (!CollectionUtils.isEmpty(emailInfoList)) {
-                emailInfoList.forEach(emailInfo -> emailInfo.setDeleted(true));
+                emailInfoList.forEach(emailInfo -> emailInfo.setDisabled(true));
             }
 
             List<PhoneInfo> phoneInfoList = userInfo1.getPhoneInfoList();
             if (!CollectionUtils.isEmpty(phoneInfoList)) {
-                phoneInfoList.forEach(phoneInfo -> phoneInfo.setDeleted(true));
+                phoneInfoList.forEach(phoneInfo -> phoneInfo.setDisabled(true));
             }
 
             userInfoRepository.save(userInfo1);
@@ -101,6 +113,4 @@ public class UserInfoService implements IUserInfoService {
 
         return userInfoDTO;
     }
-
-
 }

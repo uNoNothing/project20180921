@@ -25,6 +25,6 @@ public class BaseAuditDTO extends BaseDTO {
     private String updatedBy;
 
     public BaseAuditDTO(BaseDTO baseDTO) {
-        super(baseDTO.getId(), baseDTO.getDeleted());
+        super(baseDTO.getId(), baseDTO.getDisabled());
     }
 }

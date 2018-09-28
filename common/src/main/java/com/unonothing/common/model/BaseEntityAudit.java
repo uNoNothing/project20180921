@@ -34,7 +34,7 @@ public class BaseEntityAudit extends BaseEntity {
     private String currentUser;
 
     public BaseEntityAudit(BaseEntity baseEntity) {
-        super(baseEntity.getDeleted());
+        super(baseEntity.getDisabled());
     }
 
     @PrePersist

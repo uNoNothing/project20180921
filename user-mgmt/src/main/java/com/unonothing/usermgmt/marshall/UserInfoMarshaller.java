@@ -65,6 +65,10 @@ public class UserInfoMarshaller {
             userInfo.setEmailInfoList(EmailInfoMarshaller.unmarshall(userInfoDTO.getEmailList(), userInfo));
         }
 
+        if (!CollectionUtils.isEmpty(userInfoDTO.getPhoneList())) {
+            userInfo.setPhoneInfoList(PhoneInfoMarshaller.unmarshall(userInfoDTO.getPhoneList(), userInfo));
+        }
+
         return userInfo;
     }
 

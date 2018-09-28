@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.annotations.Where;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -32,13 +31,13 @@ public class BaseEntity implements Serializable {
     protected Integer id;
 
     // soft delete
-    @Column(name = "deleted", nullable = false)
-    private Boolean deleted = false;
+    @Column(name = "disabled", nullable = false)
+    private Boolean disabled = false;
 
     @Column(name = "uuid", nullable = false)
     private String uuid = Uuid.generate();
 
-    public BaseEntity(Boolean deleted) {
-        this.deleted = deleted;
+    public BaseEntity(Boolean disabled) {
+        this.disabled = disabled;
     }
 }

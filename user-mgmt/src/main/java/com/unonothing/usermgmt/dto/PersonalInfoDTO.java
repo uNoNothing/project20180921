@@ -15,10 +15,10 @@ import lombok.ToString;
 public class PersonalInfoDTO extends BaseAuditDTO {
 
     @ApiModelProperty(notes = "true if address or email or phone is preferred one")
-    private Boolean preferred = false;
+    private Boolean preferred = true;
 
     public PersonalInfoDTO(BaseAuditDTO baseEntityAuditDTO) {
-        super(new BaseDTO(baseEntityAuditDTO.getId(), baseEntityAuditDTO.getDeleted()));
+        super(new BaseDTO(baseEntityAuditDTO.getId(), baseEntityAuditDTO.getDisabled()));
     }
 
     public PersonalInfoDTO(BaseAuditDTO baseEntityAuditDTO, Boolean preferred) {

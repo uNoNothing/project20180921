@@ -25,7 +25,7 @@ import javax.validation.constraints.Size;
 @Setter
 @NoArgsConstructor
 @ToString
-@Where(clause = "deleted='false'")
+@Where(clause = "disabled='false'")
 public class AddressInfo extends PersonalInfo {
 
     @Column(name = "address1", nullable = false)
@@ -69,7 +69,7 @@ public class AddressInfo extends PersonalInfo {
     private UserInfo userInfo;
 
     public AddressInfo(PersonalInfo personalInfo) {
-        super(new BaseEntityAudit(new BaseEntity(personalInfo.getDeleted())),
+        super(new BaseEntityAudit(new BaseEntity(personalInfo.getDisabled())),
                 personalInfo.getPreferred());
     }
 }

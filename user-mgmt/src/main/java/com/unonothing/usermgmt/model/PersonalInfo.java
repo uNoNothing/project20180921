@@ -21,7 +21,7 @@ public class PersonalInfo extends BaseEntityAudit {
     private Boolean preferred = false;
 
     public PersonalInfo(BaseEntityAudit baseEntityAudit) {
-        super(new BaseEntity(baseEntityAudit.getDeleted()));
+        super(new BaseEntity(baseEntityAudit.getDisabled()));
     }
 
     public PersonalInfo(BaseEntityAudit baseEntityAudit, Boolean preferred) {

@@ -27,12 +27,12 @@ public class BaseDTO implements Serializable {
     @ApiModelProperty(notes = "error message, system generated")
     private String message;
 
-    @ApiModelProperty(notes = "true if object is deleted or to be deleted")
-    private Boolean deleted;
+    @ApiModelProperty(notes = "true if object is disabled or to be disabled")
+    private Boolean disabled;
 
-    public BaseDTO(Integer id, Boolean deleted) {
+    public BaseDTO(Integer id, Boolean disabled) {
         this.id = id;
-        this.deleted = deleted;
+        this.disabled = disabled;
     }
 
 }

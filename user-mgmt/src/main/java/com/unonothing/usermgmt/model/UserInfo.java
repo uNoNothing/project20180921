@@ -24,7 +24,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@Where(clause = "deleted='false'")
+@Where(clause = "disabled='false'")
 public class UserInfo extends BaseEntityAudit {
 
     @Column(name = "username", updatable = false)
@@ -49,7 +49,7 @@ public class UserInfo extends BaseEntityAudit {
 
 
     public UserInfo(BaseEntityAudit baseEntityAudit) {
-        super(new BaseEntity(baseEntityAudit.getDeleted()));
+        super(new BaseEntity(baseEntityAudit.getDisabled()));
     }
 
     public UserInfo(BaseEntityAudit baseEntityAudit, String userName) {

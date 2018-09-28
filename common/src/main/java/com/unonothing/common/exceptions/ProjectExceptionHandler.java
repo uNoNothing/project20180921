@@ -20,12 +20,12 @@ public class ProjectExceptionHandler extends ResponseEntityExceptionHandler {
 
     private final static Logger log = LoggerFactory.getLogger(ExceptionHandler.class);
 
-
     // catch validation exceptions
     @ExceptionHandler(ValidationException.class)
     public ResponseEntity<BaseDTO> handleValidationException(ValidationException ex) {
 
         log.error("Exception caught at handleValidationException.");
+        log.error(ex.getCause().getMessage());
 
         return handler(ex.getCause().getMessage(), HttpStatus.BAD_REQUEST);
     }
@@ -35,6 +35,7 @@ public class ProjectExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<BaseDTO> handleNullPointerException(NullPointerException ex) {
 
         log.error("Exception caught at handleNullPointerException.", ex);
+
         return handler(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
@@ -43,6 +44,8 @@ public class ProjectExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<BaseDTO> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
 
         log.error("Exception caught at handleDataIntegrityViolationException.");
+        log.error(ex.getCause().getCause().getMessage());
+
         return handler(ex.getCause().getCause().getMessage(), HttpStatus.BAD_REQUEST);
     }
 
@@ -76,9 +79,11 @@ public class ProjectExceptionHandler extends ResponseEntityExceptionHandler {
         if ((ex.getHttpStatus().compareTo(HttpStatus.BAD_REQUEST) == 0)
                 || (ex.getHttpStatus().compareTo(HttpStatus.NO_CONTENT) == 0)) {
             log.error("Exception caught at handleProjectException.");
+            log.error(ex.getMessage());
         } else {
             log.error("Exception caught at handleProjectException.", ex);
         }
+
         return handler(ex.getMessage(), ex.getHttpStatus());
     }
 
@@ -87,6 +92,7 @@ public class ProjectExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<BaseDTO> handleException(Exception ex) {
 
         log.error("Exception caught at handleException.", ex);
+
         return handler(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
@@ -95,14 +101,10 @@ public class ProjectExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     private BaseDTO createBaseDTO(String message) {
-//        log.error(ex.getMessage());
-
         BaseDTO baseDTO = new BaseDTO();
         baseDTO.setError(true);
         baseDTO.setMessage(message);
 
         return baseDTO;
     }
-
-
 }

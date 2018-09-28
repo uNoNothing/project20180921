@@ -11,8 +11,8 @@ public class BaseEntityMarshaller {
         if (baseEntity.getId() != null) {
             baseDTO.setId(baseEntity.getId());
         }
-        if (baseEntity.getDeleted()) {
-            baseDTO.setDeleted(baseEntity.getDeleted());
+        if (baseEntity.getDisabled()) {
+            baseDTO.setDisabled(baseEntity.getDisabled());
         }
 
         return baseDTO;
@@ -22,18 +22,18 @@ public class BaseEntityMarshaller {
 
         Boolean deleted;
 
-        if (baseDTO.getDeleted() != null) {
-            deleted = baseDTO.getDeleted();
+        if (baseDTO.getDisabled() != null) {
+            deleted = baseDTO.getDisabled();
         } else {
             deleted = false;
         }
         BaseEntity baseEntity = new BaseEntity() {
             @Override
-            public void setDeleted(Boolean deleted) {
-                super.setDeleted(deleted);
+            public void setDisabled(Boolean disabled) {
+                super.setDisabled(disabled);
             }
         };
-        baseEntity.setDeleted(deleted);
+        baseEntity.setDisabled(deleted);
 
         return baseEntity;
     }
