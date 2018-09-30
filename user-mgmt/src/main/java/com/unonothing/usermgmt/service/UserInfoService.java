@@ -113,4 +113,14 @@ public class UserInfoService implements IUserInfoService {
 
         return userInfoDTO;
     }
+
+    @Override
+    public void delete(BaseDTO baseDTO) {
+        Optional<UserInfo> userInfo = userInfoRepository.findById(baseDTO.getId());
+        if (userInfo.isPresent()) {
+            userInfoRepository.deleteById(baseDTO.getId());
+        } else {
+            throw ExceptionFactory.create(ExceptionType.NO_CONTENT);
+        }
+    }
 }

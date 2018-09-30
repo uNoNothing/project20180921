@@ -1,11 +1,11 @@
 ## SERVER PORT ##
-server.port: 7002
+server.port: 7001
 
 ## APPLICATION NAME ##
-spring.application.name: user-mgmt
+spring.application.name: db-migration
 
 ---
-spring.profiles: local
+spring.profiles: default, local
 spring.cloud.config.uri: http://localhost:7000
 
 ---

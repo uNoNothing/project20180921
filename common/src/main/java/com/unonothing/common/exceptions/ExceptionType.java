@@ -14,7 +14,7 @@ public enum ExceptionType {
     // INTERNAL_SERVER_ERROR for all server error
 
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "{0}"),
-    NO_CONTENT(HttpStatus.NO_CONTENT, "Empty result. Not an error"),
+    NO_CONTENT(HttpStatus.NO_CONTENT, "No Content"),
     BAD_REQUEST(HttpStatus.BAD_REQUEST, "Input validation failed: {0}: {1}");
 
     private HttpStatus status;

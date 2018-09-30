@@ -15,4 +15,6 @@ public interface IUserInfoService {
 //    void update(UserInfoDTO userInfoDTO);
 
     void disable(BaseDTO baseDTO);
+
+    void delete(BaseDTO baseDTO);
 }

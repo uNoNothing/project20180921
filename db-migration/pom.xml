@@ -4,10 +4,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.unonothing</groupId>
-    <artifactId>user-mgmt</artifactId>
+    <artifactId>db-migration</artifactId>
 
-    <name>user-mgmt</name>
-    <description>user management</description>
+    <name>db-migration</name>
+    <description>db migration using flyway</description>
 
     <parent>
         <groupId>com.unonothing</groupId>
@@ -31,16 +31,36 @@
     <dependencies>
 
         <dependency>
-            <groupId>com.unonothing</groupId>
-            <artifactId>common</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-config</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>5.1.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!--Resolution: the app is not a webapp because it doesn't have an embedded container (e.g. Tomcat)
+        on the classpath. Adding one fixed it. If you are using Maven, then add
+        spring-boot-starter-web in pom.xml-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -54,7 +74,7 @@
     </dependencies>
 
     <build>
-        <finalName>user-mgmt</finalName>
+        <finalName>db-migration</finalName>
     </build>
 
 </project>

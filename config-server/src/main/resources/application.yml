@@ -1,8 +1,24 @@
 ## SERVER PORT ##
 server.port: 7000
 
+## APPLICATION NAME ##
+spring.application.name: config-server
+
 ## CLOUD CONFIG ##
 spring.profiles.include: native
 spring.cloud.config.server.native.search-locations: classpath:/repository/{profile}
 security.basic.enabled: false
 management.security.enabled: false
+
+## LOGGING ##
+logging.level.ROOT: ERROR
+logging.level.com.unonothing: TRACE
+logging.file: ../log/config-server.log
+logging.file.max-size: 10MB
+
+
+## COLORIZED LOG ##
+spring.output.ansi.enabled: ALWAYS
+
+## GIT INFO @ /actuator/info ##
+management.info.git.mode: full

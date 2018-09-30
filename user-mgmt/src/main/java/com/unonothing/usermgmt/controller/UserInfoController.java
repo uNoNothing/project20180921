@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,6 +57,7 @@ public class UserInfoController {
         return userInfoService.read();
     }
 
+    // use only when you can not delete user
     @ApiOperation(value = "disable a user")
     @PutMapping("/user")
     public void disable(@RequestBody BaseDTO baseDTO) {
@@ -79,5 +81,14 @@ public class UserInfoController {
             throw ExceptionFactory.create(ExceptionType.BAD_REQUEST, "userId", userId);
         }
         return userInfoService.read(baseDTO);
+    }
+
+    @ApiOperation(value = "delete a user")
+    @DeleteMapping("/user")
+    public void delete(@RequestBody BaseDTO baseDTO) {
+        if (log.isTraceEnabled()) {
+            log.trace("DELETE /user");
+        }
+        userInfoService.delete(baseDTO);
     }
 }
