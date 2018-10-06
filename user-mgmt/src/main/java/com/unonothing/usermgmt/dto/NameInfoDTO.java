@@ -17,6 +17,9 @@ import javax.validation.constraints.Size;
 @ApiModel(description = "Name info")
 public class NameInfoDTO extends PersonalInfoDTO {
 
+    @ApiModelProperty(notes = "version is optional")
+    private Integer version = 1;
+
     @ApiModelProperty(notes = "title is optional")
     @Size(max = 255)
     private String title;

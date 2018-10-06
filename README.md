@@ -1,3 +1,11 @@
+# my config
+- java 10
+- maven 3.5.4
+- mysql 8.0.12
+    . db: project20180921
+    . username: project20180921_user
+    . password: project20180921Secret@
+
 # how to run from command line (terminal)
 - in a terminal, navigate to root directory: project20180921 and run
 `mvn clean install`

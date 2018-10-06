@@ -25,6 +25,9 @@ import javax.validation.constraints.Size;
 @Where(clause = "disabled='false'")
 public class NameInfo extends PersonalInfo {
 
+    @Column(name = "version", nullable = false)
+    private Integer version;
+
     @Size(max = 255)
     private String title;
 

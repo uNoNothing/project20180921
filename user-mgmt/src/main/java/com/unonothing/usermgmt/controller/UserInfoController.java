@@ -78,7 +78,7 @@ public class UserInfoController {
         if (userId != null) {
             baseDTO.setId(userId);
         } else {
-            throw ExceptionFactory.create(ExceptionType.BAD_REQUEST, "userId", userId);
+            throw ExceptionFactory.create(ExceptionType.BAD_REQUEST, "userId", null);
         }
         return userInfoService.read(baseDTO);
     }

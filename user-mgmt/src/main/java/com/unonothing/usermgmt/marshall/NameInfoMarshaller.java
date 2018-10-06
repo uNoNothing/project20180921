@@ -22,7 +22,7 @@ public class NameInfoMarshaller {
         return nameInfoDTOList;
     }
 
-    private static NameInfoDTO marshall(NameInfo nameInfo) {
+    public static NameInfoDTO marshall(NameInfo nameInfo) {
 
         PersonalInfoDTO personalInfoDTO = PersonalInfoMarshaller.marshall(nameInfo);
 
@@ -31,6 +31,10 @@ public class NameInfoMarshaller {
         nameInfoDTO.setUserId(nameInfo.getUserInfo().getId());
 
         if (nameInfo != null) {
+
+            if (null != nameInfo.getVersion()){
+                nameInfoDTO.setVersion(nameInfo.getVersion());
+            }
             if (!StringUtils.isEmpty(nameInfo.getTitle())) {
                 nameInfoDTO.setTitle(nameInfo.getTitle());
             }
@@ -56,7 +60,7 @@ public class NameInfoMarshaller {
         return nameInfoList;
     }
 
-    private static NameInfo unmarshall(NameInfoDTO nameInfoDTO, UserInfo userInfo) {
+    public static NameInfo unmarshall(NameInfoDTO nameInfoDTO, UserInfo userInfo) {
 
         PersonalInfo personalInfo = PersonalInfoMarshaller.unmarshall(nameInfoDTO);
 
@@ -65,6 +69,9 @@ public class NameInfoMarshaller {
         nameInfo.setUserInfo(userInfo);
 
         if (nameInfoDTO != null) {
+            if (null != nameInfoDTO.getVersion()){
+                nameInfo.setVersion(nameInfoDTO.getVersion());
+            }
             if (!StringUtils.isEmpty(nameInfoDTO.getTitle())) {
                 nameInfo.setTitle(nameInfoDTO.getTitle());
             }

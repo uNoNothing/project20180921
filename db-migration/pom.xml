@@ -58,8 +58,10 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!--Resolution: the app is not a webapp because it doesn't have an embedded container (e.g. Tomcat)
-        on the classpath. Adding one fixed it. If you are using Maven, then add
+        <!-- db migration will self stop because
+        the app is not a webapp because it doesn't
+        have an embedded container (e.g. Tomcat)
+        on the classpath. If you are using Maven, then add
         spring-boot-starter-web in pom.xml-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
